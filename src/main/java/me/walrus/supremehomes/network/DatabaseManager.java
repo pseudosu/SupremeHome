@@ -51,7 +51,7 @@ public class DatabaseManager {
         Connection con = getConnection();
         PreparedStatement pst = con.prepareStatement(SQL_QUERY);
         int result = pst.executeUpdate();
-
+        con.close();
     }
 
     public static void updateHome(String homeName, String UUID, double x, double y, double z, String world) throws SQLException {
@@ -69,7 +69,7 @@ public class DatabaseManager {
         pst.setString(4, world);
         pst.setString(5, homeName);
         pst.executeUpdate();
-
+        con.close();
     }
 
     public static void createHome(Home home) throws SQLException {
@@ -84,6 +84,7 @@ public class DatabaseManager {
         pst.setDouble(5, home.getZ());
 
         pst.executeUpdate();
+        con.close();
     }
 
     public static boolean deleteHome(String UUID, String homeName) throws SQLException {
@@ -92,7 +93,7 @@ public class DatabaseManager {
         PreparedStatement pst = con.prepareStatement(SQL_QUERY);
         pst.setString(1, homeName);
         int result = pst.executeUpdate();
-
+        con.close();
         return result > 0;
     }
 
