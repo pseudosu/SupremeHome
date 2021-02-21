@@ -21,11 +21,6 @@ public final class SupremeHomes extends JavaPlugin {
         // Plugin startup logic
         PluginManager pm = Bukkit.getServer().getPluginManager();
         SupremeManager supremeManager = new SupremeManager(this);
-//        Objects.requireNonNull(getCommand("home")).setExecutor(new CmdHome());
-//        Objects.requireNonNull(getCommand("listhomes")).setExecutor(new CmdListHomes());
-//        Objects.requireNonNull(getCommand("delhome")).setExecutor(new CmdDeleteHome());
-//        Objects.requireNonNull(getCommand("sethome")).setExecutor(new CmdSetHome());
-
         pm.registerEvents(new JoinListener(), this);
 
         configManager = new ConfigManager(this);
