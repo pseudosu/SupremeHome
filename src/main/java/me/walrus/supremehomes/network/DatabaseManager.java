@@ -50,8 +50,8 @@ public class DatabaseManager {
                 if (rs.getString("table_name").equalsIgnoreCase(UUID)) {
                     home = new Home();
                     home.setX(rs.getDouble("x"));
-                    home.setX(rs.getDouble("y"));
-                    home.setX(rs.getDouble("z"));
+                    home.setY(rs.getDouble("y"));
+                    home.setZ(rs.getDouble("z"));
                     home.setOwnerUUID(UUID);
                     home.setName(rs.getString("name"));
                     homes.add(home);
