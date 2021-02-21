@@ -1,0 +1,4 @@
+name: SupremeHomes
+version: ${project.version}
+main: me.walrus.supremehomes.SupremeHomes
+api-version: 1.13
