@@ -1,59 +1,63 @@
 package me.walrus.supremehomes.commands;
 
+import cloud.commandframework.CommandManager;
+import cloud.commandframework.annotations.Argument;
+import cloud.commandframework.annotations.CommandDescription;
+import cloud.commandframework.annotations.CommandMethod;
+import cloud.commandframework.annotations.CommandPermission;
+import cloud.commandframework.annotations.suggestions.Suggestions;
+import cloud.commandframework.bukkit.BukkitCommandManager;
+import cloud.commandframework.context.CommandContext;
+import cloud.commandframework.tasks.TaskConsumer;
 import me.walrus.supremehomes.network.Home;
 import me.walrus.supremehomes.network.PlayerData;
 import me.walrus.supremehomes.util.Permissions;
 import me.walrus.supremehomes.util.Util;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
-public class CmdHome implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+public class CmdHome {
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be ran as a Player.");
-            return false;
-        }
-        Player player = (Player) sender;
-        if (!player.hasPermission(Permissions.BASE)) {
-            Util.sendMessage(player, "&cError: You do not have permission to perform this command.");
-            return false;
-        }
+    private BukkitCommandManager<CommandSender> manager;
+
+    public CmdHome(BukkitCommandManager<CommandSender> manager){
+        this.manager = manager;
+    }
+
+    @CommandDescription("Set a home")
+    @CommandPermission(Permissions.BASE)
+    @CommandMethod("home|shome [home]")
+    private void homeCommand(Player player, @Argument("home") String homeName) {
         try {
             PlayerData playerData = new PlayerData(player.getUniqueId());
             if (playerData.getHomes().isEmpty()) {
                 Util.sendMessage(player, "&cError: You have not created any homes. Try: &7/sethome&c.");
-                return false;
+                return;
             }
-            if (args.length == 0) {
+            if (homeName == null) {
                 Optional<Home> home = playerData.getHomes().stream().filter(o -> o.getName().equalsIgnoreCase("default")).findFirst();
                 if (home.isPresent()) {
-                    player.teleport(home.get().getLocation());
-                    Util.sendMessage(player, "&7Teleporting...");
-                    return true;
+                    Location location = home.get().getLocation();
+                    this.manager.taskRecipe().begin(location).synchronous((TaskConsumer<Location>) player::teleport)
+                            .execute(() -> Util.sendMessage(player, "&7Teleporting..."));
                 }
-            }else{
-                String toHomeName = args[0];
-                Optional<Home> home = playerData.getHomes().stream().filter(o -> o.getName().equalsIgnoreCase(toHomeName)).findFirst();
+            } else {
+                Optional<Home> home = playerData.getHomes().stream().filter(o -> o.getName().equalsIgnoreCase(homeName)).findFirst();
                 if (home.isPresent()) {
-                    player.teleport(home.get().getLocation());
-                    Util.sendMessage(player, "&7Teleporting...");
-                    return true;
-                }else{
-                    Util.sendMessage(player, "&cError: That home does not exist. Try: &7/sethome " + args[0]);
-                    return false;
+                    Location location = home.get().getLocation();
+                    this.manager.taskRecipe().begin(location).synchronous((TaskConsumer<Location>) player::teleport)
+                            .execute(() -> Util.sendMessage(player, "&7Teleporting..."));
+                } else {
+                    Util.sendMessage(player, "&cError: That home does not exist. Try: &7/sethome " + homeName);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return false;
     }
 }

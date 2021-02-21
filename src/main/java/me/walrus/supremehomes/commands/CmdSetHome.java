@@ -1,50 +1,40 @@
 package me.walrus.supremehomes.commands;
 
+import cloud.commandframework.annotations.Argument;
+import cloud.commandframework.annotations.CommandDescription;
+import cloud.commandframework.annotations.CommandMethod;
+import cloud.commandframework.annotations.CommandPermission;
 import me.walrus.supremehomes.network.PlayerData;
 import me.walrus.supremehomes.util.Permissions;
 import me.walrus.supremehomes.util.Util;
 import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
 
-public class CmdSetHome implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+public class CmdSetHome {
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be ran as a Player.");
-            return false;
-        }
-        Player player = (Player) sender;
-        if (!player.hasPermission(Permissions.BASE) || !player.hasPermission(Permissions.SET_HOME)) {
-            Util.sendMessage(player, "&cError: You do not have permission to perform this command.");
-            return false;
-        }
+    @CommandDescription("Set a home")
+    @CommandPermission(Permissions.SET_HOME)
+    @CommandMethod("sethome|sshome [home]")
+    private void setHomeCommand(Player player, @Argument("home") String homeName) {
         Location loc = player.getLocation();
-
-        if (args.length == 0) {
+        if (homeName == null) {
             try {
                 PlayerData playerData = new PlayerData(player.getUniqueId());
                 playerData.addHome("default", loc);
                 Util.sendMessage(player, "&aHome '&7default&a' set!");
-                return true;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 PlayerData playerData = new PlayerData(player.getUniqueId());
-                playerData.addHome(args[0], loc);
-                Util.sendMessage(player, "&aHome '&7" + args[0] + "&a' set!");
-                return true;
+                playerData.addHome(homeName, loc);
+                Util.sendMessage(player, "&aHome '&7" + homeName + "&a' set!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 }

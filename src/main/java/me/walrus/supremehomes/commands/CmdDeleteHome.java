@@ -1,5 +1,10 @@
 package me.walrus.supremehomes.commands;
 
+import cloud.commandframework.annotations.Argument;
+import cloud.commandframework.annotations.CommandDescription;
+import cloud.commandframework.annotations.CommandMethod;
+import cloud.commandframework.annotations.CommandPermission;
+import cloud.commandframework.bukkit.BukkitCommandManager;
 import me.walrus.supremehomes.network.PlayerData;
 import me.walrus.supremehomes.util.Permissions;
 import me.walrus.supremehomes.util.Util;
@@ -10,35 +15,20 @@ import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
 
-public class CmdDeleteHome implements CommandExecutor {
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be ran as a Player.");
-            return false;
-        }
-        Player player = (Player) sender;
-        if (!player.hasPermission(Permissions.BASE) || !player.hasPermission(Permissions.DELETE_HOME)) {
-            Util.sendMessage(player, "&cError: You do not have permission to perform this command.");
-            return false;
-        }
-        if(args.length == 0){
-            Util.sendMessage(player, "&cError: Invalid syntax. Usage: &7/delhome [name]");
-            return false;
-        }
-
+public class CmdDeleteHome {
+    @CommandDescription("Delete a home")
+    @CommandPermission(Permissions.DELETE_HOME)
+    @CommandMethod("delhome|dhome <home>")
+    private void deleteCommand(Player player, @Argument("home") String homeName) {
         try {
             PlayerData playerData = new PlayerData(player.getUniqueId());
-            if(playerData.deleteHome(args[0])){
+            if(playerData.deleteHome(homeName)){
                 Util.sendMessage(player, "&aHome deleted.");
-                return true;
             }else{
                 Util.sendMessage(player, "&cError: Could not delete home. Home does not exist. Try /listhomes");
-                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
     }
 }

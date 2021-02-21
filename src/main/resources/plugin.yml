@@ -2,16 +2,3 @@ name: SupremeHomes
 version: ${project.version}
 main: me.walrus.supremehomes.SupremeHomes
 api-version: 1.13
-commands:
-  home:
-    description: Go to a home
-    aliases: [supremehome, shome]
-  delhome:
-    description: Delete a home
-    aliases: [supremedelhome, sdelhome]
-  listhomes:
-    description: List homes
-    aliases: [supremelisthomes, slisthomes]
-  sethome:
-    description: Set a home
-    aliases: [supremesethome, ssethome]

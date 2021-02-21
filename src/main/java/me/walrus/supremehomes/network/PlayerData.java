@@ -23,11 +23,17 @@ public class PlayerData {
     }
 
     public String getHomesAsString(){
+        List<String> homeNames = getHomesAsList();
+        return String.join("&a, &7", homeNames);
+    }
+
+    public List<String> getHomesAsList(){
         List<String> homeNames = new ArrayList<>();
         for(Home home : homes){
             homeNames.add(home.getName());
         }
-        return String.join("&a, &7", homeNames);
+
+        return homeNames;
     }
 
     public void addHome(String name, Location location) throws SQLException {
