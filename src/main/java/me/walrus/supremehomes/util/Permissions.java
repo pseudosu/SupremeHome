@@ -2,8 +2,7 @@ package me.walrus.supremehomes.util;
 
 public class Permissions {
 
-    public static final String PERM_SETHOME = "supremehomes.sethome";
-    public static final String PERM_DELHOME = "supremehomes.delhome";
-    public static final String PERM_LISTHOMES = "supremehomes.listhomes";
-    public static final String PERM_BASE = "supremehomes.base";
+    public static final String SET_HOME = "supremehomes.sethome";
+    public static final String DELETE_HOME = "supremehomes.delhome";
+    public static final String BASE = "supremehomes.base";
 }

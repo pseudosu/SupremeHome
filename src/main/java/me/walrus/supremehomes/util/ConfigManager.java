@@ -22,7 +22,7 @@ public class ConfigManager {
         p.getConfig().addDefault(CONFIG_PATH + "mysql.username", "supremehomes");
         p.getConfig().addDefault(CONFIG_PATH + "mysql.password", "SecurePassword");
 
-        p.getConfig().addDefault(CONFIG_PATH + "settings.prefix", "&7[&cSupremeHomes&7]&r");
+        p.getConfig().addDefault(CONFIG_PATH + "prefix", "&7[&cSupremeHomes&7]&r");
 
         p.saveConfig();
     }
@@ -70,5 +70,12 @@ public class ConfigManager {
     public String getMYSQL_PASSWORD() {
         return getString("mysql.password");
     }
-    public String getMYSQL_PORT(){return getString("mysl.port");}
+
+    public String getMYSQL_PORT() {
+        return getString("mysql.port");
+    }
+
+    public String getPrefix() {
+        return getString("prefix");
+    }
 }

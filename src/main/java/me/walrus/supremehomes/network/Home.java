@@ -1,22 +1,32 @@
 package me.walrus.supremehomes.network;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+
 import java.sql.SQLException;
 
 public class Home {
     private double x, y, z;
     private String name;
     private String ownerUUID;
+    private String world;
 
     public double getX() {
         return x;
     }
 
-    public void updateHome(double x, double y, double z) throws SQLException {
+    public void updateHome(double x, double y, double z, String world) throws SQLException {
         setX(x);
         setY(y);
         setZ(z);
-        DatabaseManager.updateHome(name, ownerUUID, x, y, z);
+        setWorld(world);;
+        DatabaseManager.updateHome(name, ownerUUID, x, y, z, world);
     }
+
+    public Location getLocation() {
+        return new Location(Bukkit.getWorld(world), getX(), getY(), getZ());
+    }
+
 
     public void setX(double x) {
         this.x = x;
@@ -54,4 +64,11 @@ public class Home {
         this.ownerUUID = ownerUUID;
     }
 
+    public String getWorld() {
+        return world;
+    }
+
+    public void setWorld(String world) {
+        this.world = world;
+    }
 }
