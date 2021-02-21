@@ -1,5 +1,7 @@
 package me.walrus.supremehomes.network;
 
+import java.sql.SQLException;
+
 public class Home {
     private double x, y, z;
     private String name;
@@ -7,6 +9,13 @@ public class Home {
 
     public double getX() {
         return x;
+    }
+
+    public void updateHome(double x, double y, double z) throws SQLException {
+        setX(x);
+        setY(y);
+        setZ(z);
+        DatabaseManager.updateHome(name, ownerUUID, x, y, z);
     }
 
     public void setX(double x) {

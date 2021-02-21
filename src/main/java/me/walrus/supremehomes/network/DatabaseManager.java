@@ -4,7 +4,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.walrus.supremehomes.SupremeHomes;
 import me.walrus.supremehomes.util.ConfigManager;
-import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,12 +37,61 @@ public class DatabaseManager {
         return ds.getConnection();
     }
 
-    public  static List<Home> fetchData(String UUID) throws SQLException {
+    public static void initializePlayer(String UUID) throws SQLException {
+        String SQL_QUERY = "CREATE TABLE IF NOT EXISTS byp_userdata" +
+                "(id int not null auto_increment," +
+                " name varchar(255)," +
+                " x int(11)," +
+                " y int(11)," +
+                " z int(255)," +
+                "" +
+                " primary key (id))";
+
+        Connection con = getConnection();
+        PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+        int result = pst.executeUpdate();
+
+    }
+
+    public static void updateHome(String homeName, String UUID, double x, double y, double z) throws SQLException {
+        List<Home> homes = fetchData(UUID);
+        String SQL_QUERY = "update " + UUID + " set " +
+                "x = " + x + ", " +
+                "y = " + y + ", " +
+                "z = " + z + "" +
+                "where name = '" + homeName + "'";
+
+        Connection con = getConnection();
+        PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+        pst.executeUpdate();
+
+    }
+
+    public static void createHome(Home home) throws SQLException {
+        String SQL_QUERY = "insert into " + home.getOwnerUUID() + "" +
+                " values(" +
+                home.getName() + ", " +
+                home.getX() + ", " +
+                home.getY() + ", " +
+                home.getZ() + ")";
+        Connection con = getConnection();
+        PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+        pst.executeUpdate();
+    }
+
+    public static void deleteHome(String UUID, String homeName) throws SQLException {
+        String SQL_QUERY = "delete from " + UUID + " where name = " + homeName;
+        Connection con = getConnection();
+        PreparedStatement pst = con.prepareStatement(SQL_QUERY);
+        pst.executeUpdate();
+    }
+
+    public static List<Home> fetchData(String UUID) throws SQLException {
         String SQL_QUERY = "select * from " + UUID;
-        List<Home> homes = null;
+        List<Home> homes;
         try (Connection con = getConnection();
              PreparedStatement pst = con.prepareStatement(SQL_QUERY);
-             ResultSet rs = pst.executeQuery();) {
+             ResultSet rs = pst.executeQuery()) {
             homes = new ArrayList<>();
             Home home;
             while (rs.next()) {
