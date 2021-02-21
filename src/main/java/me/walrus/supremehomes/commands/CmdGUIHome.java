@@ -45,7 +45,7 @@ public class CmdGUIHome {
                 SGButton homeButton = new SGButton(
                         new ItemBuilder(Material.GRASS)
                                 .name("&a" + home.getName())
-                                .lore("&7x: &a" + home.getX(), "&7y: &a" + home.getY(), "&7z: " + home.getZ())
+                                .lore("&7x: &a" + home.getX(), "&7y: &a" + home.getY(), "&7z: &a" + home.getZ())
                                 .build()
                 ).withListener((InventoryClickEvent event) -> {
                     String homeName = ChatColor.stripColor(Objects.requireNonNull(event.getCurrentItem()).getItemMeta().getDisplayName());
