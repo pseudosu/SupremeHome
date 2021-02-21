@@ -29,6 +29,11 @@ public class CmdSetHome {
             }
         } else {
             try {
+                int length = homeName.length();
+                if(length > 24){
+                    Util.sendMessage(player, "&cError: The provided Home name is too long. Max length: 24 characters.");
+                    return;
+                }
                 PlayerData playerData = new PlayerData(player.getUniqueId());
                 playerData.addHome(homeName, loc);
                 Util.sendMessage(player, "&aHome '&7" + homeName + "&a' set!");
