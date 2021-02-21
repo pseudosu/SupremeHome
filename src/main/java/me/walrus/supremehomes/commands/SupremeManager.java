@@ -12,18 +12,9 @@ import cloud.commandframework.execution.CommandExecutionCoordinator;
 import cloud.commandframework.extra.confirmation.CommandConfirmationManager;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
-import cloud.commandframework.tasks.TaskConsumer;
-import me.walrus.supremehomes.network.Home;
-import me.walrus.supremehomes.network.PlayerData;
-import me.walrus.supremehomes.util.Permissions;
-import me.walrus.supremehomes.util.Util;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import java.sql.SQLException;
-import java.util.Optional;
 import java.util.function.Function;
 
 public class SupremeManager {
@@ -93,6 +84,7 @@ public class SupremeManager {
         this.annotationParser.parse(new CmdDeleteHome());
         this.annotationParser.parse(new CmdSetHome());
         this.annotationParser.parse(new CmdListHomes());
+        this.annotationParser.parse(new CmdGUIHome(manager));
 
         final Command.Builder<CommandSender> builder = this.manager.commandBuilder("base");
     }

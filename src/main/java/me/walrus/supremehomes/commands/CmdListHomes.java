@@ -1,18 +1,14 @@
 package me.walrus.supremehomes.commands;
 
-import cloud.commandframework.annotations.Argument;
 import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
-import cloud.commandframework.annotations.suggestions.Suggestions;
-import cloud.commandframework.context.CommandContext;
-import me.walrus.supremehomes.network.PlayerData;
+import me.walrus.supremehomes.wrappers.PlayerData;
 import me.walrus.supremehomes.util.Permissions;
 import me.walrus.supremehomes.util.Util;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class CmdListHomes{
 

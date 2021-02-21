@@ -1,5 +1,7 @@
-package me.walrus.supremehomes.network;
+package me.walrus.supremehomes.wrappers;
 
+import me.walrus.supremehomes.network.DatabaseManager;
+import me.walrus.supremehomes.network.Home;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 

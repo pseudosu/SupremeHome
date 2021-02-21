@@ -75,7 +75,6 @@ public class DatabaseManager {
     public static void createHome(Home home) throws SQLException {
         String SQL_QUERY = "insert into `" + home.getOwnerUUID() + "`" +
                 " values(id, ?, ?, ?, ?, ?)";
-        System.out.println(SQL_QUERY);
         Connection con = getConnection();
         PreparedStatement pst = con.prepareStatement(SQL_QUERY);
         pst.setString(1, home.getName());
