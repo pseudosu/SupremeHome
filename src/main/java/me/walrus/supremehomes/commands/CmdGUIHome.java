@@ -43,11 +43,8 @@ public class CmdGUIHome {
                 if (worldName.equalsIgnoreCase("world")) {
                     homeMenu.addButton(createButton(home, player, Material.GRASS));
                 } else if (worldName.equalsIgnoreCase("world_nether")) {
-                    System.out.println(worldName);
                     homeMenu.addButton(createButton(home, player, Material.NETHERRACK));
                 } else if (worldName.equalsIgnoreCase("world_the_end")) {
-                    System.out.println(worldName);
-
                     homeMenu.addButton(createButton(home, player, Material.ENDER_PEARL));
                 }
             }
