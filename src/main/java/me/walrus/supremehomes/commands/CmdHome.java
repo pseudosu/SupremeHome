@@ -41,6 +41,8 @@ public class CmdHome {
                     Location location = home.get().getLocation();
                     this.manager.taskRecipe().begin(location).synchronous((TaskConsumer<Location>) player::teleport)
                             .execute(() -> Util.sendMessage(player, "&7Teleporting..."));
+                }else{
+                    Util.sendMessage(player, "&cError: You have not set a default home yet. Try &7/sethome &cor &7/listhomes");
                 }
             } else {
                 Optional<Home> home = playerData.getHomes().stream().filter(o -> o.getName().equalsIgnoreCase(homeName)).findFirst();

@@ -21,7 +21,7 @@ public class CmdDeleteHome {
             if(playerData.deleteHome(homeName)){
                 Util.sendMessage(player, "&aHome deleted.");
             }else{
-                Util.sendMessage(player, "&cError: Could not delete home. Home does not exist. Try /listhomes");
+                Util.sendMessage(player, "&cError: Could not delete home. Home does not exist. Try &7/listhomes");
             }
         } catch (SQLException e) {
             e.printStackTrace();

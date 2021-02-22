@@ -47,7 +47,7 @@ public class PlayerData {
         newHome.setOwnerUUID(uuid.toString());
         newHome.setWorld(location.getWorld().getName());
         if(homes.isEmpty()){
-            DatabaseManager.createHome(newHome);
+            DatabaseManager.createHome(newHome, uuid.toString());
             return;
         }
         for (Home home : homes) {
@@ -58,7 +58,7 @@ public class PlayerData {
                 return;
             }
         }
-        DatabaseManager.createHome(newHome);
+        DatabaseManager.createHome(newHome, uuid.toString());
         homes = DatabaseManager.fetchData(uuid.toString());
         homes.add(newHome);
     }

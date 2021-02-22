@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.walrus</groupId>
-    <artifactId>CommissionTest</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>SupremeHomes</artifactId>
+    <version>1.2-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>SupremeHomes</name>

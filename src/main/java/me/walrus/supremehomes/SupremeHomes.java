@@ -3,10 +3,13 @@ package me.walrus.supremehomes;
 import com.samjakob.spigui.SpiGUI;
 import me.walrus.supremehomes.commands.SupremeManager;
 import me.walrus.supremehomes.listeners.JoinListener;
+import me.walrus.supremehomes.network.DatabaseManager;
 import me.walrus.supremehomes.util.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.sql.SQLException;
 
 public final class SupremeHomes extends JavaPlugin {
 
@@ -26,6 +29,11 @@ public final class SupremeHomes extends JavaPlugin {
         configManager = new ConfigManager(this);
         configManager.init();
 
+        try {
+            DatabaseManager.initDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

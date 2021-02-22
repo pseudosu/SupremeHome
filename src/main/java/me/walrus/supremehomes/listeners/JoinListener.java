@@ -11,10 +11,10 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
-        try {
-            DatabaseManager.initializePlayer(event.getPlayer().getUniqueId().toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            DatabaseManager.initializePlayer(event.getPlayer().getUniqueId().toString());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 }
