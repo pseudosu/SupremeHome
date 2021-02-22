@@ -46,6 +46,8 @@ public class CmdGUIHome {
                     homeMenu.addButton(createButton(home, player, Material.NETHERRACK));
                 } else if (worldName.equalsIgnoreCase("world_the_end")) {
                     homeMenu.addButton(createButton(home, player, Material.ENDER_PEARL));
+                } else {
+                    homeMenu.addButton(createButton(home, player, Material.GRASS));
                 }
             }
 
