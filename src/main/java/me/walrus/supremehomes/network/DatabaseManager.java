@@ -99,9 +99,9 @@ public class DatabaseManager {
                 update.executeUpdate();
                 Bukkit.getLogger().log(Level.INFO, "DONE");
             }
-//            String DROP_QUERY = "drop table `" + tableName + "`";
-//            PreparedStatement drop = con.prepareStatement(DROP_QUERY);
-//            drop.executeUpdate();
+            String DROP_QUERY = "drop table `" + tableName + "`";
+            PreparedStatement drop = con.prepareStatement(DROP_QUERY);
+            drop.executeUpdate();
 
         }
         con.close();
