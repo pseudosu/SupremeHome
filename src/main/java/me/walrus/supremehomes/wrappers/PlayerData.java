@@ -35,7 +35,6 @@ public class PlayerData {
     }
 
     public void addHome(String name, Location location) throws SQLException {
-
         Home newHome = new Home();
         newHome.setX(location.getX());
         newHome.setY(location.getY());
@@ -46,39 +45,14 @@ public class PlayerData {
         Home home = homes.stream()
                 .filter(a -> a.getName().equalsIgnoreCase(name))
                 .findFirst().orElse(null);
-        if(home == null)
+        if (home == null)
             DatabaseManager.createHome(newHome, uuid.toString());
-        else{
+        else {
             DatabaseManager.updateHome(name, uuid.toString(), newHome.getX(), newHome.getY(), newHome.getZ(), location.getWorld().getName());
             homes = DatabaseManager.fetchData(uuid.toString());
             homes.add(newHome);
         }
     }
-
-//    public void addHome(String name, Location location) throws SQLException {
-//        Home newHome = new Home();
-//        newHome.setX(location.getX());
-//        newHome.setY(location.getY());
-//        newHome.setZ(location.getZ());
-//        newHome.setName(name);
-//        newHome.setOwnerUUID(uuid.toString());
-//        newHome.setWorld(location.getWorld().getName());
-//        if (homes.isEmpty()) {
-//            DatabaseManager.createHome(newHome, uuid.toString());
-//            return;
-//        }
-//        for (Home home : homes) {
-//            if (home.getName().equalsIgnoreCase(name)) {
-//                DatabaseManager.updateHome(name, uuid.toString(), newHome.getX(), newHome.getY(), newHome.getZ(), location.getWorld().getName());
-//                homes = DatabaseManager.fetchData(uuid.toString());
-//                homes.add(newHome);
-//                return;
-//            }
-//        }
-//        DatabaseManager.createHome(newHome, uuid.toString());
-//        homes = DatabaseManager.fetchData(uuid.toString());
-//        homes.add(newHome);
-//    }
 
     public boolean deleteHome(String name) throws SQLException {
         return DatabaseManager.deleteHome(uuid.toString(), name);
