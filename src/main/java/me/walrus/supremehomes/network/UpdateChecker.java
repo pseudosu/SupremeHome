@@ -1,11 +1,10 @@
-package me.walrus.supremehomes.network;https://api.spigotmc.org/legacy/update.php?resource=
+package me.walrus.supremehomes.network;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 import java.util.function.Consumer;

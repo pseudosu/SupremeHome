@@ -2,7 +2,7 @@ package me.walrus.supremehomes.commands;
 
 import cloud.commandframework.Command;
 import cloud.commandframework.CommandTree;
-import cloud.commandframework.annotations.*;
+import cloud.commandframework.annotations.AnnotationParser;
 import cloud.commandframework.arguments.parser.ParserParameters;
 import cloud.commandframework.arguments.parser.StandardParameters;
 import cloud.commandframework.bukkit.BukkitCommandManager;

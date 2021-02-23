@@ -2,12 +2,9 @@ package me.walrus.supremehomes.wrappers;
 
 import me.walrus.supremehomes.network.DatabaseManager;
 import me.walrus.supremehomes.network.Home;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

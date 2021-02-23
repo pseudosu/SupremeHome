@@ -4,9 +4,9 @@ import cloud.commandframework.annotations.Argument;
 import cloud.commandframework.annotations.CommandDescription;
 import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
-import me.walrus.supremehomes.wrappers.PlayerData;
 import me.walrus.supremehomes.util.Permissions;
 import me.walrus.supremehomes.util.Util;
+import me.walrus.supremehomes.wrappers.PlayerData;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
