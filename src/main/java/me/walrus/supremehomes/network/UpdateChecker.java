@@ -1,4 +1,4 @@
-package me.walrus.supremehomes.network;
+package me.walrus.supremehomes.network;https://api.spigotmc.org/legacy/update.php?resource=
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
