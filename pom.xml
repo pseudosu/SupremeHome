@@ -6,7 +6,7 @@
 
     <groupId>me.walrus</groupId>
     <artifactId>SupremeHomes</artifactId>
-    <version>1.2-RELEASE</version>
+    <version>1.4</version>
     <packaging>jar</packaging>
 
     <name>SupremeHomes</name>
