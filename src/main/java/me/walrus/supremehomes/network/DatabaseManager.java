@@ -81,7 +81,7 @@ public class DatabaseManager {
             PreparedStatement ps = con.prepareStatement(DATA_QUERY);
             ResultSet data = ps.executeQuery();
             while (data.next()) {
-                String homeName = data.getString("");
+                String homeName = data.getString("home");
                 String worldName = data.getString("world");
                 double x = data.getDouble("x");
                 double y = data.getDouble("y");
