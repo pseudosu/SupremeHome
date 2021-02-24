@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public final class SupremeHomes extends JavaPlugin {
 
     private static ConfigManager configManager;
-    public static SpiGUI spiGUI;
+    private static SpiGUI spiGUI;
 
     @Override
     public void onEnable() {
@@ -35,13 +35,6 @@ public final class SupremeHomes extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
     public static ConfigManager getConfigManager() {
         return configManager;
     }

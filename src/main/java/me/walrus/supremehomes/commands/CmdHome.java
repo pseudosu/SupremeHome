@@ -7,9 +7,9 @@ import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.bukkit.BukkitCommandManager;
 import cloud.commandframework.tasks.TaskConsumer;
 import me.walrus.supremehomes.network.Home;
-import me.walrus.supremehomes.wrappers.PlayerData;
 import me.walrus.supremehomes.util.Permissions;
 import me.walrus.supremehomes.util.Util;
+import me.walrus.supremehomes.wrappers.PlayerData;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class CmdHome {
 
     private BukkitCommandManager<CommandSender> manager;
 
-    public CmdHome(BukkitCommandManager<CommandSender> manager){
+    public CmdHome(BukkitCommandManager<CommandSender> manager) {
         this.manager = manager;
     }
 
@@ -39,15 +39,20 @@ public class CmdHome {
                 Optional<Home> home = playerData.getHomes().stream().filter(o -> o.getName().equalsIgnoreCase("default")).findFirst();
                 if (home.isPresent()) {
                     Location location = home.get().getLocation();
+                    location.setYaw(player.getLocation().getYaw());
+                    location.setPitch(player.getLocation().getPitch());
                     this.manager.taskRecipe().begin(location).synchronous((TaskConsumer<Location>) player::teleport)
                             .execute(() -> Util.sendMessage(player, "&7Teleporting..."));
-                }else{
+                } else {
                     Util.sendMessage(player, "&cError: You have not set a default home yet. Try &7/sethome &cor &7/listhomes");
                 }
             } else {
                 Optional<Home> home = playerData.getHomes().stream().filter(o -> o.getName().equalsIgnoreCase(homeName)).findFirst();
                 if (home.isPresent()) {
                     Location location = home.get().getLocation();
+                    location.setYaw(player.getLocation().getYaw());
+                    location.setPitch(player.getLocation().getPitch());
+
                     this.manager.taskRecipe().begin(location).synchronous((TaskConsumer<Location>) player::teleport)
                             .execute(() -> Util.sendMessage(player, "&7Teleporting..."));
                 } else {
