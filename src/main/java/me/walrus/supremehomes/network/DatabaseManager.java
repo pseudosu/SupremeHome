@@ -81,7 +81,7 @@ public class DatabaseManager {
             PreparedStatement ps = con.prepareStatement(DATA_QUERY);
             ResultSet data = ps.executeQuery();
             while (data.next()) {
-                String homeName = data.getString("home");
+                String homeName = data.getString("name");
                 String worldName = data.getString("world");
                 double x = data.getDouble("x");
                 double y = data.getDouble("y");
@@ -97,8 +97,8 @@ public class DatabaseManager {
                 update.setDouble(5, y);
                 update.setDouble(6, z);
                 update.executeUpdate();
-                Bukkit.getLogger().log(Level.INFO, "DONE");
             }
+            Bukkit.getLogger().log(Level.INFO, "DONE");
             String DROP_QUERY = "drop table `" + tableName + "`";
             PreparedStatement drop = con.prepareStatement(DROP_QUERY);
             drop.executeUpdate();
