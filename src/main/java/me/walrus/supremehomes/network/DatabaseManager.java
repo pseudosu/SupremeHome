@@ -81,7 +81,7 @@ public class DatabaseManager {
             PreparedStatement ps = con.prepareStatement(DATA_QUERY);
             ResultSet data = ps.executeQuery();
             while (data.next()) {
-                String homeName = data.getString("name");
+                String homeName = data.getString("");
                 String worldName = data.getString("world");
                 double x = data.getDouble("x");
                 double y = data.getDouble("y");
@@ -109,8 +109,8 @@ public class DatabaseManager {
 
     public static void updateHome(String homeName, String UUID, double x, double y, double z, String world) throws SQLException {
         String SQL_QUERY = "update home set " +
-                "x = ?, y = ?, z = ?, world = ?" +
-                " WHERE name = ? and user_d = ?";
+                "x = ?, y = ?, z = ?, world_name = ?" +
+                " WHERE home_name = ? and user_id = ?";
 
         Connection con = getConnection();
         PreparedStatement pst = con.prepareStatement(SQL_QUERY);

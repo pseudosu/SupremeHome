@@ -1,9 +1,9 @@
 package com.samjakob.spigui;
 
 import com.samjakob.spigui.buttons.SGButton;
+import com.samjakob.spigui.item.ItemBuilder;
 import com.samjakob.spigui.menu.SGMenuListener;
 import com.samjakob.spigui.menu.SGOpenMenu;
-import com.samjakob.spigui.item.ItemBuilder;
 import com.samjakob.spigui.pagination.SGPaginationButtonBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

@@ -2,14 +2,12 @@ package me.walrus.supremehomes.wrappers;
 
 import me.walrus.supremehomes.network.DatabaseManager;
 import me.walrus.supremehomes.network.Home;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class PlayerData {
     private UUID uuid;
@@ -24,18 +22,13 @@ public class PlayerData {
         return homes;
     }
 
-    public String getHomesAsString(){
-        List<String> homeNames = getHomesAsList();
-        return String.join("&a, &7", homeNames);
+    public String getHomesAsString() {
+        return String.join("&a, &7", getHomesAsList());
     }
 
-    public List<String> getHomesAsList(){
-        List<String> homeNames = new ArrayList<>();
-        for(Home home : homes){
-            homeNames.add(home.getName());
-        }
-
-        return homeNames;
+    public List<String> getHomesAsList() {
+        return homes.stream().map(Home::getName)
+                .collect(Collectors.toList());
     }
 
     public void addHome(String name, Location location) throws SQLException {
@@ -46,21 +39,16 @@ public class PlayerData {
         newHome.setName(name);
         newHome.setOwnerUUID(uuid.toString());
         newHome.setWorld(location.getWorld().getName());
-        if(homes.isEmpty()){
+        Home home = homes.stream()
+                .filter(a -> a.getName().equalsIgnoreCase(name))
+                .findFirst().orElse(null);
+        if (home == null)
             DatabaseManager.createHome(newHome, uuid.toString());
-            return;
+        else {
+            DatabaseManager.updateHome(name, uuid.toString(), newHome.getX(), newHome.getY(), newHome.getZ(), location.getWorld().getName());
+            homes = DatabaseManager.fetchData(uuid.toString());
+            homes.add(newHome);
         }
-        for (Home home : homes) {
-            if (home.getName().equalsIgnoreCase(name)) {
-                DatabaseManager.updateHome(name, uuid.toString(), newHome.getX(), newHome.getY(), newHome.getZ(), location.getWorld().getName());
-                homes = DatabaseManager.fetchData(uuid.toString());
-                homes.add(newHome);
-                return;
-            }
-        }
-        DatabaseManager.createHome(newHome, uuid.toString());
-        homes = DatabaseManager.fetchData(uuid.toString());
-        homes.add(newHome);
     }
 
     public boolean deleteHome(String name) throws SQLException {
